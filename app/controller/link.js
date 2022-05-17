@@ -67,7 +67,6 @@ module.exports = class extends Controller {
 			},
 			{
 				isDelete: true,
-				deleteTime: Date.now(),
 				updateTime: Date.now(),
 			},
 		)
@@ -122,7 +121,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				linkOwner: 0,
 			},
@@ -156,7 +154,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				linkOwner: 0,
 			},
@@ -170,7 +167,7 @@ module.exports = class extends Controller {
 			if (item.linkScreenId) {
 				p.push(
 					new Promise(resolve => {
-						ctx.model.Screen.findOne({
+						ctx.model['Screen'].findOne({
 							isDelete: false,
 							screenId: item.linkScreenId,
 						}).then(res => {

@@ -216,7 +216,6 @@ module.exports = class extends Controller {
 			{
 				isDelete: true,
 				isCurrentVersion: false,
-				deleteTime: Date.now(),
 				updateTime: Date.now(),
 			},
 		)
@@ -230,7 +229,6 @@ module.exports = class extends Controller {
 				{
 					isDelete: true,
 					isCurrentVersion: false,
-					deleteTime: Date.now(),
 					updateTime: Date.now(),
 				},
 			)
@@ -287,7 +285,6 @@ module.exports = class extends Controller {
 				__v: 0,
 				_id: 0,
 				componentOwner: 0,
-				deleteTime: 0,
 				isDelete: 0,
 			},
 		)
@@ -314,7 +311,6 @@ module.exports = class extends Controller {
 				__v: 0,
 				_id: 0,
 				componentOwner: 0,
-				deleteTime: 0,
 				isDelete: 0,
 			},
 		)
@@ -352,9 +348,7 @@ module.exports = class extends Controller {
 							updateTime: 0,
 							sort: 0,
 							status: 0,
-							isCollection: 0,
 							isCurrentVersion: 0,
-							deleteTime: 0,
 							isDelete: 0,
 						},
 					).then(data => {
@@ -385,7 +379,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				componentConfig: 0,
 				componentAvatar: 0,
@@ -430,14 +423,9 @@ module.exports = class extends Controller {
 		if (or.length > 0) {
 			search.$and = [
 				{
-					$or: [{ isCollection: false }, { isCollection: undefined }],
-				},
-				{
 					$or: or,
 				},
 			]
-		} else {
-			search.$or = [{ isCollection: false }, { isCollection: undefined }]
 		}
 
 		const result = await ctx.model.MarketComponent.find(
@@ -449,12 +437,10 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				isCollection: 0,
 				isCurrentVersion: 0,
 				componentConfig: 0,
 				sort: 0,
 				status: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				componentOwner: 0,
 			},
@@ -520,11 +506,9 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				isCollection: 0,
 				isCurrentVersion: 0,
 				sort: 0,
 				status: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				componentOwner: 0,
 			},
@@ -561,14 +545,9 @@ module.exports = class extends Controller {
 		if (or.length > 0) {
 			search.$and = [
 				{
-					$or: [{ isCollection: false }, { isCollection: undefined }],
-				},
-				{
 					$or: or,
 				},
 			]
-		} else {
-			search.$or = [{ isCollection: false }, { isCollection: undefined }]
 		}
 
 		const data = await ctx.model.MarketComponent.find(
@@ -580,7 +559,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				isCollection: 0,
 				isCurrentVersion: 0,
 				componentAvatar: 0,
 				componentJsUrl: 0,
@@ -595,7 +573,6 @@ module.exports = class extends Controller {
 				componentOwner: 0,
 			},
 		)
-			.sort({ deleteTime: -1 })
 			.skip((pageNum - 1) * pageSize)
 			.limit(Number(pageSize))
 		const count = await ctx.model.MarketComponent.count({
@@ -627,14 +604,9 @@ module.exports = class extends Controller {
 		if (or.length > 0) {
 			search.$and = [
 				{
-					$or: [{ isCollection: false }, { isCollection: undefined }],
-				},
-				{
 					$or: or,
 				},
 			]
-		} else {
-			search.$or = [{ isCollection: false }, { isCollection: undefined }]
 		}
 
 		const data = await ctx.model.MarketComponent.find(
@@ -646,7 +618,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				isCollection: 0,
 				isCurrentVersion: 0,
 				componentAvatar: 0,
 				componentJsUrl: 0,
@@ -654,7 +625,6 @@ module.exports = class extends Controller {
 				componentConfig: 0,
 				createTime: 0,
 				componentType: 0,
-				deleteTime: 0,
 				sort: 0,
 				isDelete: 0,
 				componentOwner: 0,
@@ -691,14 +661,12 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				sort: 0,
 				status: 0,
 				isCurrentVersion: 0,
 				componentZipUrl: 0,
 				componentJsUrl: 0,
-				isCollection: 0,
 				componentOwner: 0,
 				createTime: 0,
 				updateTime: 0,

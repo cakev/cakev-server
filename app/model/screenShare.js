@@ -8,7 +8,6 @@ module.exports = app => {
 		screenShareTime: { type: Date }, // 大屏分享结束时间
 		createTime: { type: Date, default: Date.now }, // 创建时间
 		updateTime: { type: Date, default: Date.now }, // 更新时间
-		deleteTime: { type: Date, default: null }, // 删除时间
 		isDelete: { type: Boolean, default: false }, // 是否删除
 	})
 

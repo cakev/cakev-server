@@ -9,10 +9,9 @@ module.exports = class extends Controller {
 	 */
 	async detailByCookie() {
 		const userId = this.user
-		const data = await this.ctx.model['User'].findOne({ userId }, { _id: 0, __v: 0, isDelete: 0 })
+		const data = await this.ctx.model['User'].findOne({ userId })
 		if (data) {
-			const result = this.service['user'].formatResult(data)
-			this.success({ data: result })
+			this.success({ data: this.ctx.service['user'].formatResult(data) })
 		} else {
 			this.user = null
 			this.error({ msg: '登录已过期' })
@@ -29,16 +28,13 @@ module.exports = class extends Controller {
 	 */
 	async loginByCookie() {
 		const { userName, password } = this.params
-		const data = await this.ctx.model['User'].findOne(
-			{
-				userName,
-				password: this.encrypt(password),
-			},
-			{ _id: 0, __v: 0, isDelete: 0 },
-		)
+		const data = await this.ctx.model['User'].findOne({
+			userName,
+			password: this.encrypt(password),
+		})
 		if (data) {
 			this.user = data['userId']
-			this.success({ data })
+			this.success({ data: this.ctx.service['user'].formatResult(data) })
 		} else {
 			this.error({ msg: '用户名或密码错误' })
 		}

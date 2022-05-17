@@ -81,7 +81,7 @@ module.exports = class extends Controller {
 	 * @description 错误返回
 	 */
 	get error() {
-		return (err, options = {}) => {
+		return (options = {}) => {
 			const { msg = '请求失败', data = '', obj, code = 500 } = options
 			let result = {
 				code,

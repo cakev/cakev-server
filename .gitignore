@@ -31,9 +31,11 @@ captures/
 target/
 logs/
 
+# nodejs
+run/
+
 # web
 dist/
-run/
 node_modules/
 npm-debug.log*
 yarn-debug.log*

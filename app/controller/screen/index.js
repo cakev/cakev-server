@@ -1,15 +1,26 @@
 const Controller = require('../../core/base_controller')
-const { v4 } = require('uuid')
 
-/**
- * @controller ScreenController 大屏
- */
 module.exports = class extends Controller {
 	/**
-	 * @summary 创建大屏【需要用户登录】
-	 * @router post /screen/create
-	 * @request body screen_create_request
-	 * @response 200 response
+	 * @api {post} /screen/create 创建大屏
+	 * @apiName screenCreate
+	 * @apiGroup screen
+	 * @apiBody {String} screenName 大屏名
+	 * @apiBody {Object} screenWidgets 大屏组件配置
+	 * @apiBody {Object} screenWidgetsLays 大屏组件配置
+	 * @apiBody {Object} screenScene 大屏场景配置
+	 * @apiBody {String} screenAvatar 大屏缩略图
+	 * @apiBody {String} screenVersion 大屏版本号
+	 * @apiBody {String} screenLayoutMode 大屏适配方式 full-size 充满页面 full-width 100%宽度 full-height 100%高度
+	 * @apiBody {Number} screenWidth 大屏宽度
+	 * @apiBody {Number} screenHeight 大屏高度
+	 * @apiBody {String} screenBackGroundColor 大屏背景颜色
+	 * @apiBody {String} screenBackGroundImage 大屏背景图片
+	 * @apiBody {String} screenMainScene 大屏首屏场景
+	 * @apiBody {String} screenDomain 大屏场景domain配置
+	 * @apiBody {String} screenHeaders 大屏场景headers配置
+	 * @apiBody {Object} screenFilter 大屏滤镜
+	 * @apiUse response
 	 */
 	async create() {
 		const { ctx } = this
@@ -30,7 +41,7 @@ module.exports = class extends Controller {
 			screenHeaders,
 			screenFilter,
 		} = this.params
-		const data = await ctx.model.Screen.create({
+		const data = await ctx.model['Screen'].create({
 			screenName,
 			screenVersion,
 			screenLayoutMode,
@@ -52,15 +63,31 @@ module.exports = class extends Controller {
 	}
 
 	/**
-	 * @summary 更新大屏【需要用户登录】
-	 * @router post /screen/update
-	 * @request body screen_update_request
-	 * @response 200 response
+	 * @api {post} /screen/update 更新大屏
+	 * @apiName screenUpdate
+	 * @apiGroup screen
+	 * @apiBody {String} screenId screenId
+	 * @apiBody {String} screenName 大屏名
+	 * @apiBody {Object} screenWidgets 大屏组件配置
+	 * @apiBody {Object} screenWidgetsLays 大屏组件配置
+	 * @apiBody {Object} screenScene 大屏场景配置
+	 * @apiBody {String} screenAvatar 大屏缩略图
+	 * @apiBody {String} screenVersion 大屏版本号
+	 * @apiBody {String} screenLayoutMode 大屏适配方式 full-size 充满页面 full-width 100%宽度 full-height 100%高度
+	 * @apiBody {Number} screenWidth 大屏宽度
+	 * @apiBody {Number} screenHeight 大屏高度
+	 * @apiBody {String} screenBackGroundColor 大屏背景颜色
+	 * @apiBody {String} screenBackGroundImage 大屏背景图片
+	 * @apiBody {String} screenMainScene 大屏首屏场景
+	 * @apiBody {String} screenDomain 大屏场景domain配置
+	 * @apiBody {String} screenHeaders 大屏场景headers配置
+	 * @apiBody {Object} screenFilter 大屏滤镜
+	 * @apiUse response
 	 */
 	async update() {
 		const { ctx } = this
 		const { screenId } = this.params
-		const data = await ctx.model.Screen.updateOne(
+		const data = await ctx.model['Screen'].updateOne(
 			{
 				screenId,
 				screenOwner: this.user,
@@ -76,15 +103,16 @@ module.exports = class extends Controller {
 	}
 
 	/**
-	 * @summary 删除大屏【需要用户登录】
-	 * @router post /screen/destroy
-	 * @request body screen_detail_request
-	 * @response 200 response
+	 * @api {post} /screen/destroy 删除大屏
+	 * @apiName screenDestroy
+	 * @apiGroup screen
+	 * @apiBody {String} screenId screenId
+	 * @apiUse response
 	 */
 	async destroy() {
 		const { ctx } = this
 		const { screenId } = this.params
-		const data = await ctx.model.Screen.updateOne(
+		const data = await ctx.model['Screen'].updateOne(
 			{
 				screenId,
 				screenOwner: this.user,
@@ -103,15 +131,16 @@ module.exports = class extends Controller {
 	}
 
 	/**
-	 * @summary 恢复大屏【需要用户登录】
-	 * @router post /screen/restore
-	 * @request body screen_detail_request
-	 * @response 200 response
+	 * @api {post} /screen/restore 恢复大屏
+	 * @apiName screenRestore
+	 * @apiGroup screen
+	 * @apiBody {String} screenId screenId
+	 * @apiUse response
 	 */
 	async restore() {
 		const { ctx } = this
 		const { screenId } = this.params
-		const data = await ctx.model.Screen.updateOne(
+		const data = await ctx.model['Screen'].updateOne(
 			{
 				screenId,
 				screenOwner: this.user,
@@ -130,15 +159,16 @@ module.exports = class extends Controller {
 	}
 
 	/**
-	 * @summary 大屏详情【大屏未分享 需要用户登录/大屏已分享 不需要用户登录】
-	 * @router post /screen/detail
-	 * @request body screen_detail_request
-	 * @response 200 response
+	 * @api {post} /screen/detail 大屏详情
+	 * @apiName screenDetail
+	 * @apiGroup screen
+	 * @apiBody {String} screenId screenId
+	 * @apiUse response
 	 */
 	async detail() {
 		const { ctx } = this
 		const { screenId } = this.params
-		let data = await ctx.model.Screen.findOne(
+		let data = await ctx.model['Screen'].findOne(
 			{
 				screenId,
 				isDelete: false,
@@ -147,7 +177,6 @@ module.exports = class extends Controller {
 			{
 				__v: 0,
 				_id: 0,
-				deleteTime: 0,
 				isDelete: 0,
 				screenOwner: 0,
 			},
@@ -160,72 +189,32 @@ module.exports = class extends Controller {
 	}
 
 	/**
-	 * @summary 大屏分页列表【需要用户登录】
-	 * @router post /screen/list
-	 * @request body screen_list_request
-	 * @response 200 response
+	 * @api {post} /screen/all 大屏列表
+	 * @apiName screenAll
+	 * @apiGroup screen
+	 * @apiBody {String} screenName 大屏名
+	 * @apiUse response
 	 */
-	async list() {
+	async all() {
 		const { ctx } = this
 		let search = Object.assign({}, this.params)
-		delete search.pageSize
-		delete search.pageNum
 		if (search.screenName) {
 			const reg = new RegExp(search.screenName, 'i')
 			search.$or = [{ screenName: { $regex: reg } }]
 			delete search.screenName
 		}
-		const list = await ctx.model.Screen.find(
-			{
+		const list = await ctx.model['Screen']
+			.find({
 				isDelete: false,
 				screenOwner: this.user,
 				...search,
-			},
-			{
-				__v: 0,
-				_id: 0,
-				screenWidgets: 0,
-				deleteTime: 0,
-				isDelete: 0,
-				screenOwner: 0,
-			},
-		).sort({ sort: 1, createTime: 1 })
-		const count = await ctx.model.Screen.count({
+			})
+			.sort({ createTime: 1 })
+		const count = await ctx.model['Screen'].count({
 			isDelete: false,
 			screenOwner: this.user,
 			...search,
 		})
-		this.success({ data: { list, count } })
-	}
-
-	/**
-	 * @summary 大屏外链列表
-	 * @router post /screen/linkList
-	 * @request body screen_detail_request
-	 * @response 200 response
-	 */
-	async linkList() {
-		const { ctx } = this
-		const { screenId } = this.params
-		const data = await ctx.model.Link.find(
-			{
-				isDelete: false,
-				linkScreenId: screenId,
-			},
-			{
-				__v: 0,
-				_id: 0,
-				deleteTime: 0,
-				isDelete: 0,
-				linkOwner: 0,
-				createTime: 0,
-				updateTime: 0,
-				linkName: 0,
-				sort: 0,
-				linkScreenId: 0,
-				linkId: 0,
-			},
-		).sort({ sort: 1, createTime: 1 })
-		this.success({ data })
+		this.success({ data: { list: this.ctx.service['screen'].formatResult(list), count } })
 	}
 }
