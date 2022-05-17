@@ -23,6 +23,7 @@ module.exports = class extends Service {
 
 	formatResult(data) {
 		const result = JSON.parse(JSON.stringify(data))
+		delete result.password
 		return result
 	}
 }

@@ -2,29 +2,6 @@ const Controller = require('../../core/base_controller')
 
 module.exports = class extends Controller {
 	/**
-	 * @api {post} /user/password 用户创建
-	 * @apiName userPassword
-	 * @apiGroup user
-	 * @apiBody {String} username 用户名
-	 * @apiBody {String} password 密码
-	 * @apiUse response
-	 */
-	async password() {
-		const { username, password } = this.params
-		const note = await this.ctx.model['User'].findOneAndUpdate(
-			{
-				username,
-			},
-			{ password: this.encrypt(password) },
-		)
-		if (note) {
-			this.success({ msg: '更新成功' })
-		} else {
-			this.error({ msg: '更新失败' })
-		}
-	}
-
-	/**
 	 * @api {post} /user/detail-by-cookie 通过cookie用户详情
 	 * @apiName userDetailByCookie
 	 * @apiGroup user
@@ -34,13 +11,10 @@ module.exports = class extends Controller {
 		const userId = this.user
 		const data = await this.ctx.model['User'].findOne({ userId }, { _id: 0, __v: 0, isDelete: 0 })
 		if (data) {
-			if (!data.status) {
-				this.error({ msg: '用户已被禁用' })
-			} else {
-				const result = this.service['user'].formatResult(data)
-				this.success({ data: result })
-			}
+			const result = this.service['user'].formatResult(data)
+			this.success({ data: result })
 		} else {
+			this.user = null
 			this.error({ msg: '登录已过期' })
 		}
 	}
@@ -49,22 +23,20 @@ module.exports = class extends Controller {
 	 * @api {post} /user/login-by-cookie 通过cookie用户登录
 	 * @apiName userLoginByCookie
 	 * @apiGroup user
-	 * @apiBody {String} username 用户名
+	 * @apiBody {String} userName 用户名
 	 * @apiBody {String} password 密码
 	 * @apiUse response
 	 */
 	async loginByCookie() {
-		const { username, password } = this.params
+		const { userName, password } = this.params
 		const data = await this.ctx.model['User'].findOne(
 			{
-				username,
+				userName,
 				password: this.encrypt(password),
 			},
 			{ _id: 0, __v: 0, isDelete: 0 },
 		)
-		if (!data.status) {
-			this.error({ msg: '用户已被禁用' })
-		} else if (data) {
+		if (data) {
 			this.user = data['userId']
 			this.success({ data })
 		} else {

@@ -22,24 +22,24 @@ module.exports = appInfo => {
 		mode: 'stream',
 		fileExtensions: ['.webm'],
 	}
-
+	
 	config.cluster = {
 		listen: {
 			path: '',
-			port: 7001,
+			port: 1111,
 			hostname: '0.0.0.0',
 		},
 	}
-
+	
 	config.cors = {
 		origin: '*',
 		allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
 	}
-
+	
 	config.static = {
 		dir: [path.join(appInfo.baseDir, 'app/public')],
 		prefix: '/',
 	}
-
+	
 	return config
 }

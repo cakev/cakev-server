@@ -1,4 +1,4 @@
-const Controller = require('../core/base_controller')
+const Controller = require('../../core/base_controller')
 const { v4 } = require('uuid')
 
 /**

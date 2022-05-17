@@ -3,6 +3,7 @@
 	"version": "0.0.1-beta.1",
 	"scripts": {
 		"start": "egg-scripts start --daemon --title=cakev-server",
+		"doc": "apidoc -i app -o apidoc -c apidoc.json",
 		"stop": "egg-scripts stop --title=cakev-server",
 		"dev": "egg-bin dev",
 		"commit": "git add . && git cz"

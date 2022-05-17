@@ -23,7 +23,11 @@ module.exports = class extends Controller {
 	 * @description 平台用户 设置 时效为30天
 	 */
 	set user(value) {
-		this.ctx.cookies.set(encryptCode, value, {
+		let v = value
+		if (v) {
+			v = v.toString()
+		}
+		this.ctx.cookies.set(encryptCode, v, {
 			encrypt: true,
 			maxAge: 1000 * 60 * 60 * 24 * 30,
 		})

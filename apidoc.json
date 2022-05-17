@@ -1,0 +1,8 @@
+{
+	"name": "cakev-server",
+	"version": "0.0.1-alpha.1",
+	"description": "apiDoc basic example",
+	"title": "Custom apiDoc browser title",
+	"url" : "http://127.0.0.1:6666",
+	"sampleUrl" : true
+}

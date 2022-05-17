@@ -1,8 +1,8 @@
 module.exports = () => {
 	const config = {}
-
+	const mongodbUrl = JSON.parse(process.argv[2]).mongodbUrl
 	config.mongoose = {
-		url: 'mongodb://test1:test1@127.0.0.1/cakev',
+		url: mongodbUrl ? mongodbUrl : `mongodb://cakev:cakev@127.0.0.1/cakev`,
 		options: {
 			useUnifiedTopology: true,
 		},
