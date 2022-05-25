@@ -148,7 +148,6 @@ module.exports = class extends Controller {
 			{
 				screenId,
 				isDelete: false,
-				screenOwner: this.user,
 			},
 			{
 				__v: 0,
@@ -157,11 +156,7 @@ module.exports = class extends Controller {
 				screenOwner: 0,
 			},
 		)
-		if (data) {
-			this.success({ data })
-		} else {
-			this.error({ msg: '用户未登录', code: 4001 })
-		}
+		this.success({ data })
 	}
 
 	/**
