@@ -5,58 +5,34 @@ module.exports = class extends Controller {
 	 * @api {post} /screen/create 创建大屏
 	 * @apiName screenCreate
 	 * @apiGroup screen
-	 * @apiBody {String} screenName 大屏名
-	 * @apiBody {Object} screenWidgets 大屏组件配置
-	 * @apiBody {Object} screenWidgetsLays 大屏组件配置
-	 * @apiBody {Object} screenScene 大屏场景配置
-	 * @apiBody {String} screenAvatar 大屏缩略图
-	 * @apiBody {String} screenVersion 大屏版本号
-	 * @apiBody {String} screenLayoutMode 大屏适配方式 full-size 充满页面 full-width 100%宽度 full-height 100%高度
-	 * @apiBody {Number} screenWidth 大屏宽度
-	 * @apiBody {Number} screenHeight 大屏高度
-	 * @apiBody {String} screenBackGroundColor 大屏背景颜色
-	 * @apiBody {String} screenBackGroundImage 大屏背景图片
-	 * @apiBody {String} screenMainScene 大屏首屏场景
-	 * @apiBody {String} screenDomain 大屏场景domain配置
-	 * @apiBody {String} screenHeaders 大屏场景headers配置
-	 * @apiBody {Object} screenFilter 大屏滤镜
 	 * @apiUse response
 	 */
 	async create() {
 		const { ctx } = this
-		const {
-			screenName,
-			screenWidgets,
-			screenWidgetsLays,
-			screenScene,
-			screenAvatar,
-			screenVersion,
-			screenLayoutMode,
-			screenWidth,
-			screenHeight,
-			screenBackGroundColor,
-			screenBackGroundImage,
-			screenMainScene,
-			screenDomain,
-			screenHeaders,
-			screenFilter,
-		} = this.params
 		const data = await ctx.model['Screen'].create({
-			screenName,
-			screenVersion,
-			screenLayoutMode,
-			screenMainScene,
-			screenFilter,
-			screenWidth,
-			screenDomain,
-			screenHeaders,
-			screenHeight,
-			screenBackGroundColor,
-			screenBackGroundImage,
-			screenAvatar,
-			screenScene,
-			screenWidgets,
-			screenWidgetsLays,
+			screenName: '未命名大屏',
+			screenVersion: '',
+			screenLayoutMode: 'full-size',
+			screenMainScene: '0',
+			screenFilter: {
+				enable: false,
+				grayscale: 0,
+				opacity: 100,
+				contrast: 0,
+				brightness: 0,
+				saturate: 0,
+				hueRotate: 0,
+			},
+			screenWidth: 1920,
+			screenDomain: '',
+			screenHeaders: '{"Content-Type":"application/json"}',
+			screenHeight: 1080,
+			screenBackGroundColor: 'rgba(24, 27, 36,1)',
+			screenBackGroundImage: '',
+			screenAvatar: '',
+			screenScene: {},
+			screenWidgets: {},
+			screenWidgetsLays: {},
 			screenOwner: this.user,
 		})
 		this.success({ data })
