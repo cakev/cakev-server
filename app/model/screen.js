@@ -5,6 +5,7 @@ module.exports = app => {
 		{
 			screenId: { type: ObjectId, auto: true }, // 大屏ID
 			screenName: { type: String }, // 大屏名
+			screenHead: {}, // 外链
 			screenWidgets: {}, // 大屏组件配置
 			screenWidgetsLays: {}, // 大屏组件配置
 			screenScene: {}, // 大屏场景配置

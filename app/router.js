@@ -6,9 +6,7 @@ module.exports = app => {
 	const marketComponent = require('./router/marketComponent')
 	const marketComponentType = require('./router/marketComponentType')
 	const secretKey = require('./router/secretKey')
-	const link = require('./router/link')
 
-	link(app)
 	user(app)
 	screen(app)
 	screenShare(app)

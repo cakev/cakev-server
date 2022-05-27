@@ -11,6 +11,7 @@ module.exports = class extends Controller {
 		const { ctx } = this
 		const data = await ctx.model['Screen'].create({
 			screenName: '未命名大屏',
+			screenHead: [],
 			screenVersion: '',
 			screenLayoutMode: 'full-size',
 			screenMainScene: '0',
@@ -44,6 +45,7 @@ module.exports = class extends Controller {
 	 * @apiGroup screen
 	 * @apiBody {String} screenId screenId
 	 * @apiBody {String} screenName 大屏名
+	 * @apiBody {Array}  screenHead 大屏外链
 	 * @apiBody {Object} screenWidgets 大屏组件配置
 	 * @apiBody {Object} screenWidgetsLays 大屏组件配置
 	 * @apiBody {Object} screenScene 大屏场景配置
